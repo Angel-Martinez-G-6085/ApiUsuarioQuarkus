@@ -4,12 +4,20 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+
 import com.angel.Entity.Usuario;
 
+import jakarta.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class UserDao {
-    private static final String URL = "jdbc:mysql://server:3306/Usuarios";
-    private static final String USER = "admon";
-    private static final String PASSWORD = "acuario248";
+    @ConfigProperty(name = "quarkus.datasource.jdbc.url")
+    private String URL;
+    @ConfigProperty(name = "quarkus.datasource.username")
+    private String USER;
+    @ConfigProperty(name = "quarkus.datasource.password")
+    private String PASSWORD;
 
     public void crearUsuarios(Usuario usuario) {
         String sql = "INSERT INTO usuarios (nombre, apellido, correo, edad) VALUES ( ?, ?, ?, ? )";
@@ -17,10 +25,10 @@ public class UserDao {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(0, usuario.getNombre());
-            stmt.setString(1, usuario.getApellido());
-            stmt.setString(2, usuario.getCorreo());
-            stmt.setInt(3, usuario.getEdad());
+            stmt.setString(1, usuario.getNombre());
+            stmt.setString(2, usuario.getApellido());
+            stmt.setString(3, usuario.getCorreo());
+            stmt.setInt(4, usuario.getEdad());
 
             stmt.executeUpdate();
 
