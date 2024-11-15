@@ -47,6 +47,7 @@ public class UserDao {
 
             while (rs.next()) {
                 Usuario usuario = new Usuario();
+                usuario.setId(rs.getLong("id"));
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setApellido(rs.getString("apellido"));
                 usuario.setCorreo(rs.getString("correo"));
