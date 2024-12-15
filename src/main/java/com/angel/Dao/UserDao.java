@@ -4,20 +4,22 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import com.angel.Entity.Usuario;
 
-import jakarta.enterprise.context.ApplicationScoped;
-
 @ApplicationScoped
 public class UserDao {
     @ConfigProperty(name = "quarkus.datasource.jdbc.url")
-    private String URL;
+    String URL;
+
     @ConfigProperty(name = "quarkus.datasource.username")
-    private String USER;
+    String USER;
+
     @ConfigProperty(name = "quarkus.datasource.password")
-    private String PASSWORD;
+    String PASSWORD;
 
     public void crearUsuarios(Usuario usuario) {
         String sql = "INSERT INTO usuarios (nombre, apellido, correo, edad) VALUES ( ?, ?, ?, ? )";

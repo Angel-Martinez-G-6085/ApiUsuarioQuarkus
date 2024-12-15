@@ -2,19 +2,20 @@ package com.angel.Controller;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import com.angel.Entity.Usuario;
 import com.angel.service.usuarioService;
 
-import jakarta.inject.Inject;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 
 @Path("/usuarios")
 @Tag(name = "Usuarios", description = "Gestión de usuarios")
@@ -22,7 +23,7 @@ import jakarta.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuariosController {
     @Inject
-    private usuarioService usuariServicio;
+    usuarioService usuariServicio;
 
     @GET
     @Operation(summary = "Obtener todos los usuarios", description = "Retorna una lista con todos los usuarios registrados")
