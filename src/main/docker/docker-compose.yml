@@ -1,42 +1,35 @@
+version: '3.8'
 services:
-  mysql:
-    image: mysql:latest
-    container_name: mysql_container
+  database:
+    image: postgres:15.2
+    container_name: database_container
     environment:
-      MYSQL_ROOT_PASSWORD: toor
-      MYSQL_DATABASE: mysqlDB
-      MYSQL_USER: admon
-      MYSQL_PASSWORD: acuario248
+      POSTGRES_USER: admon
+      POSTGRES_PASSWORD: acuario248
+      POSTGRES_DB: postgress
     volumes:
-      - ./mysql_data:/var/lib/mysql
+      - ./db_data:/var/lib/postgresql/data
     ports:
-      - "3306:3306"
+      - "5432:5432"
     networks:
-      - app_network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-ptoor"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
-
-  rest:
-    image: mtzangel/my-rest-app:1.0.0-SNAPSHOT
-    container_name: rest_container
+      - user_api_network
+  
+  restapi:
+    image: usuariosapi
+    container_name: rest_api_container
     depends_on:
-      mysql:
-        condition: service_healthy
+      - database
     environment:
-      DB_HOST: mysql_container
-      DB_PORT: 3306
-      DB_NAME: mysqlDB
-      DB_USER: root
-      DB_PASSWORD: toor
+      - DB_HOST=database_container
+      - DB_PORT=5432
+      - DB_USER=admon
+      - DB_PASSWORD=acuario248
+      - DB_database=Usuarios
     ports:
       - "8080:8080"
     networks:
-      - app_network
+      - user_api_network
 
 networks:
-  app_network:
+  user_api_network:
     driver: bridge
