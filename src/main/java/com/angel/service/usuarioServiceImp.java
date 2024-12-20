@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import com.angel.Dao.UserDao;
 import com.angel.Entity.Usuario;
+import com.angel.Responses.CreateUserResponse;
 
 @ApplicationScoped
 public class usuarioServiceImp implements usuarioService {
@@ -19,9 +20,8 @@ public class usuarioServiceImp implements usuarioService {
     }
 
     @Override
-    public String createUser(Usuario usuario) {
+    public CreateUserResponse createUser(Usuario usuario) {
         userDao.crearUsuarios(usuario);
-        return "Usuario creado correctamente";
+        return new CreateUserResponse("200", "Usuario creado correctamente", usuario.getId());
     }
-    
 }

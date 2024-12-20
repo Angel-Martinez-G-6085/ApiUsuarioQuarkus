@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: acuario248
       POSTGRES_DB: postgress
     volumes:
-      - ./db_data:/var/lib/postgresql/data
+      - userapidata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     networks:
@@ -37,3 +37,7 @@ services:
 networks:
   user_api_network:
     driver: bridge
+
+volumes:
+  userapidata:
+    external: true

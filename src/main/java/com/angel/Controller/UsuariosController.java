@@ -14,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import com.angel.Entity.Usuario;
+import com.angel.Responses.CreateUserResponse;
 import com.angel.service.usuarioService;
 
 
@@ -33,7 +34,7 @@ public class UsuariosController {
 
     @POST
     @Operation(summary = "Crear un nuevo usuario", description = "Crea un nuevo usuario y lo guarda en la base de datos")
-    public String createUsuario(Usuario user){
+    public CreateUserResponse createUsuario(Usuario user){
         return usuariServicio.createUser(user);
     }
 }
