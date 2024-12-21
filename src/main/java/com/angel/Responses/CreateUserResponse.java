@@ -1,19 +1,21 @@
 package com.angel.Responses;
 
+import com.angel.Entity.Usuario;
+
 public class CreateUserResponse extends GlogalResponse {
 
-    private Long userId;
+    private Usuario usuario;
 
-    public CreateUserResponse(String status, String message, Long userId) {
+    public CreateUserResponse(String status, String message, Usuario usuario) {
         super( status,message);
-        this.userId = userId;
+        this.usuario = usuario;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Usuario getUser() {
+        return usuario;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUser(Usuario user) {
+        this.usuario = user;
     }
 }

@@ -22,6 +22,6 @@ public class usuarioServiceImp implements usuarioService {
     @Override
     public CreateUserResponse createUser(Usuario usuario) {
         userDao.crearUsuarios(usuario);
-        return new CreateUserResponse("200", "Usuario creado correctamente", usuario.getId());
+        return new CreateUserResponse("200", "Usuario creado correctamente", usuario);
     }
 }
