@@ -24,6 +24,7 @@ services:
       - DB_USER=admon
       - DB_PASSWORD=acuario248
       - DB_database=Usuarios
+      - LOGS_LOCATION=/home/jboss/logs/app.log
     ports:
       - "8080:8080"
     networks:
